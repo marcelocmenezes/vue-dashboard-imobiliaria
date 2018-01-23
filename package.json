@@ -1,7 +1,7 @@
 {
-  "name": "dashboard",
+  "name": "dashboard-imobiliaria",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "",
   "author": "Marcelo Menezes <marcelomenezes.0907@gmail.com>",
   "private": true,
   "scripts": {
