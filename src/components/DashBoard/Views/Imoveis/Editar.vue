@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-layout row class="mb-2">
         <v-flex>
-          <h1>Nova Administradora de Imóveis</h1>
+          <h1>Editar Cliente</h1>
           
         </v-flex>
       </v-layout>
@@ -14,9 +14,6 @@
               <v-card-title>
                 <span class="grey--text"></span>
               </v-card-title>
-              <v-card-text>
-                
-              </v-card-text>
       
             </v-card>
           </v-flex>

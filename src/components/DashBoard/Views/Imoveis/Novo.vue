@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-layout row class="mb-2">
         <v-flex>
-          <h1>Nova Administradora de Imóveis</h1>
+          <h1>Novo Cliente</h1>
           
         </v-flex>
       </v-layout>
@@ -54,14 +54,8 @@ export default {
     }
   },
   methods: {
-    editar() {
-
-    },
     criar(item) {
       //axios.post('http://localhost:3000/clientes', cliente )
-    },
-    listarClientes() {
-      //axios.get('http://localhost:3000/clientes').then((response) => { this.cliente = response.data})
     }
   },
   created() {

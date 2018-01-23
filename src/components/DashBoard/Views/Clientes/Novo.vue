@@ -11,15 +11,60 @@
       <v-layout row>
           <v-flex>
             <v-card>
-              <v-card-title>
-                <span class="grey--text"></span>
-              </v-card-title>
               <v-card-text>
-                <v-form>
-                  
-                </v-form>  
+                <v-container fluid grid-list-xl>
+                  <v-form v-model="cliente">
+                    
+                    <v-layout row>
+                      <v-flex xs12>
+                        <v-text-field label="Nome"></v-text-field>
+                      </v-flex>
+                    </v-layout>
+                    
+                    <v-layout row>
+                      <v-flex xs12 md3>
+                        <v-text-field label="CPF/CNPJ"></v-text-field>
+                      </v-flex>
+                      <v-flex xs12 md3>
+                        <v-text-field label="RG"></v-text-field>
+                      </v-flex>
+                      <v-spacer></v-spacer>
+                      <v-flex xs12 md6>
+                        <v-text-field label="E-mail"></v-text-field>
+                      </v-flex>
+                    </v-layout>
+
+                    <v-layout row>
+                      <v-flex xs12 md4>
+
+                      </v-flex>
+
+                      <v-flex xs12 md4>
+                        <v-select
+                          label="Sexo"
+                          v-bind:items="selectSexo"
+                          v-model="cliente.sexo"
+                          ></v-select>
+                      </v-flex>
+
+                      <v-flex xs12 md4>
+                        <v-select
+                          label="Estado Civil"
+                          v-bind:items="selectEstadoCivil"
+           
+                          v-model="cliente.estadoCivil"
+                          ></v-select>
+                          
+                      </v-flex>
+                    </v-layout>
+
+
+                  </v-form>
+                </v-container>
               </v-card-text>
-      
+              <v-card-action>
+                
+              </v-card-action>
             </v-card>
           </v-flex>
       </v-layout>
@@ -40,11 +85,25 @@ export default {
   
   data: () => {
     return {
-      search: '',
+      
+      selectEstadoCivil: [
+        {value: 1, text: 'Solteiro(a)'},
+        {value: 2, text: 'Casado(a)'},
+        {value: 3, text: 'Viuvo(a)'},
+        {value: 4, text: 'Divorciado(a)'}
+      ],
+      selectSexo: [
+        {value: 1, text:'Masculino'},
+        {value: 2, text: 'Feminino'}
+      ],
+      
       cliente: {
-        id: 1,
+        id: null,
         nome: '',
         cpfcnpj: '',
+        rg: '',
+        sexo: null,
+        estadoCivil: null,
         logradouro: '',
         numero: '',
         complemento: '',
