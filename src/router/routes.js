@@ -9,10 +9,10 @@ import NotFound from '../components/GeneralViews/PageNotFound.vue'
 
 //Configure Routes.
 const routes = [
-  { path: '/', redirect: '/admin' },
+  { path: '/', redirect: '/dashboard' },
   // GeneralViews.
   { path: '/auth/login', component: LoginPage },
-  { path: '*', component: NotFound },
+  { path: '*', redirect: '/' },
   // Dashboard routes. Configurado no dashboard.js
   Dashboard  
 ]

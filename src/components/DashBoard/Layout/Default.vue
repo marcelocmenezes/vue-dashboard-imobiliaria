@@ -63,12 +63,13 @@
 
       </v-list>
     </v-navigation-drawer>
-    <!-- Sidebar -->
+    
+    <!--Sidebar-->
 
     <router-view></router-view>
 
-    
   </v-app>
+  
 </template>
 
 
