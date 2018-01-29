@@ -7,8 +7,8 @@ import NovoClientes from '../components/DashBoard/Views/Clientes/Novo.vue'
 import EditarClientes from '../components/DashBoard/Views/Clientes/Editar.vue'
 
 //Imoveis
-// import ListarImoveis from '../components/DashBoard/Views/Imoveis/Listar.vue'
-// import NovoImoveis from '../components/DashBoard/Views/Imoveis/Novo.vue'
+import ListarImoveis from '../components/DashBoard/Views/Imoveis/Listar.vue'
+import NovoImoveis from '../components/DashBoard/Views/Imoveis/Novo.vue'
 // import EditarImoveis from '../components/DashBoard/Views/Imoveis/Editar.vue'
 
 
@@ -30,6 +30,8 @@ const children = [
     { path: 'clientes/editar/:id', component: EditarClientes },
     { path: 'clientes/novo', component: NovoClientes },
     
+    { path: 'imoveis', component: ListarImoveis },
+    { path: 'imoveis/novo', component: NovoImoveis },
     
     { path: 'users', component: Usuarios },
     

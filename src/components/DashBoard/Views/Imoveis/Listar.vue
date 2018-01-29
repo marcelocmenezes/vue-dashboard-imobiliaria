@@ -1,18 +1,11 @@
 <template>
   <v-content>
     <v-container fluid>
-      <v-layout row class="mb-2">
-        <v-flex>
-          <h1>Clientes</h1>
-          
-        </v-flex>
-      </v-layout>
-
       <v-layout row>
           <v-flex>
             <v-card>
               <v-card-title>
-                <span class="grey--text">Lista de Clientes</span>
+                <h1 class="grey--text">Lista de Imóveis</h1>
                 <v-spacer></v-spacer>
                 
                 <v-text-field
@@ -23,6 +16,7 @@
                       placeholder="Pesquisar..."
                     ></v-text-field>
               </v-card-title>
+              <v-divider />
             <v-data-table
               v-bind:headers="headers"
               v-bind:items="items"
@@ -33,14 +27,14 @@
               class="elevation-1"
             >
               <template slot="items" slot-scope="props">
-                <td>{{ props.item.nome }}</td>
-                <td>{{ props.item.rg }}</td>
-                <td>{{ props.item.cpf }}</td>
-                <td>{{ props.item.idade }}</td>
-                <td>
-                  <v-btn icon flat><v-icon >edit</v-icon></v-btn>
-                  <v-btn icon flat @click.prevent="excluir(props.item)"><v-icon >delete_sweep</v-icon></v-btn>
-                </td>
+                <td>{{ props.item.logradouro }}</td>
+                <td>{{ props.item.numero }}</td>
+                <td>{{ props.item.bairro }}</td>
+                <td>{{ props.item.cidade }}</td>
+                <td>{{ props.item.uf }}</td>
+                <td>{{ props.item.aluguel }}</td>
+                <td>{{ props.item.iptu }}</td>
+
               </template>
             </v-data-table>
             </v-card>
@@ -52,45 +46,65 @@
       <v-icon>add</v-icon>
     </v-btn>
     
-    <v-dialog v-model="showModal" max-width="870px">
+    <v-dialog v-model="showModal" max-width="960px" persistent>
       <v-card>
         <v-card-title>
-          <span class="headline">Cadastro de Usuários</span>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="showModal = !showModal"><v-icon>close</v-icon></v-btn>
+          <h1>Cadastro de Imóvel</h1>
+          
         </v-card-title>
-
+        <v-divider />
         <v-card-text>
-          <v-stepper v-model="e1">
-            <v-stepper-header>
-              <v-stepper-step step="1" :complete="e1 > 1">Dados Pessoais</v-stepper-step>
-              <v-divider></v-divider>
-              <v-stepper-step step="2">Dados Financeiros</v-stepper-step>
-            </v-stepper-header>
-
-            <v-stepper-items>
-
-              <v-stepper-content step="1">
-                <v-card  class="mb-5" height="200px">
-
-                </v-card>
-                <v-btn color="primary" @click.native="e1 = 2">Continue</v-btn>
-                
-              </v-stepper-content>
+          <v-container fluid grid-list-xl>
+            <v-layout row>
+              <v-flex xs12 md2 sm2>
+                <v-text-field label="CEP" v-model="imovelModel.cep" mask="#####-###" @blur="buscarCep(imovelModel.cep)"></v-text-field>
+              </v-flex>
+              <v-flex xs12 md8>
+                <v-text-field label="Logradouro" v-model="imovelModel.logradouro" disabled></v-text-field>
+              </v-flex>
+              <v-flex xs12 md2 sm2>
+                <v-text-field label="Numero" v-model="imovelModel.numero"></v-text-field>
+              </v-flex>
+            </v-layout>
               
-              <v-stepper-content step="2">
-                <v-card color="secondary" class="mb-5" height="200px">
+            <v-layout row>
+              <v-flex xs12 md5 sm5>
+                <v-text-field label="Complemento" v-model="imovelModel.complemento"></v-text-field>
+              </v-flex>
+              <v-flex xs12 md3 sm3>
+                <v-text-field label="Bairro" v-model="imovelModel.bairro" disabled></v-text-field>
+              </v-flex>
+              <v-flex xs12 md3 sm3>
+                <v-text-field label="Cidade" v-model="imovelModel.cidade" disabled></v-text-field>
+              </v-flex>
+              <v-flex xs12 md1 sm1>
+                <v-text-field label="UF" v-model="imovelModel.uf" disabled></v-text-field>
+              </v-flex>
 
-                </v-card>
-                <v-btn color="primary" @click.stop="dialog = !dialog">Salvar</v-btn>
-                
-              </v-stepper-content>
+            </v-layout>
+
+            <v-layout row>
+              <v-flex xs12 md3>
+                <v-text-field label="Valor Aluguel" v-model.lazy="imovelModel.aluguel" v-money="money"></v-text-field>
+              </v-flex>
               
-            </v-stepper-items>
+              <v-flex xs12 md3>
+                <v-text-field v-money="money" label="Valor IPTU" v-model.lazy="imovelModel.iptu"></v-text-field>
+              </v-flex>
+              
 
-          </v-stepper>
+            </v-layout>
+          </v-container>
         </v-card-text>
-
+        <v-divider />
+        <v-card-actions>
+          <v-container fluid grid-list-xl>
+            <v-layout row>
+              <v-flex><v-btn block color="error" @click="fecharFormulario()">Cancelar</v-btn></v-flex>
+              <v-flex><v-btn block color="success" @click="salvarFormulario(imovelModel)">Salvar</v-btn></v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-actions>
       </v-card>
     </v-dialog>
 
@@ -111,54 +125,73 @@ export default {
       e1: 0,
       showModal: false,
       search: '',
-      selected: {},
+      
+      imovelModel: {
+        id: null,
+        cep: '',
+        logradouro: '',
+        numero: '',
+        complemento: '',
+        bairro: '',
+        cidade: '',
+        uf: '',
+        aluguel: null,
+        iptu: null 
+      },
+
+      money: { decimal: ',', thousands: '.', prefix: 'R$ ',precision: 2, masked: false },
       headers: [
         //{ text: 'ID', value: 'id', align: 'left' },
-        { text: 'Nome', value: 'nome', align: 'left' },
-        { text: 'RG', value: 'rg', align: 'left' },
-        { text: 'CPF', value: 'cpf', align: 'left' },
-        { text: 'Idade', value: 'idade', align: 'left' },
-        { text: ''}
+        { text: 'Endereço', value: 'logradouro', align: 'left' },
+        { text: 'Numero', value: 'numero', align: 'left' },
+        { text: 'Bairro', value: 'bairro', align: 'left' },
+        { text: 'Cidade', value: 'cidade', align: 'left' },
+        { text: 'UF', value: 'uf', align: 'left' },
+        { text: 'Valor Aluguel', value: 'aluguel', align: 'left'},
+        { text: 'Valor IPTU', value: 'iptu', align: 'left'}
       ],
       items: []
     }
   },
   methods: {
-    editar() {
-
-    },
-    criar(item) {
-      axios.post('http://localhost:3000/clientes', item )
-    },
-    listarClientes() {
-      axios.get('http://localhost:3000/clientes').then((response) => { this.items = response.data})
-    },
-    excluir(item) {
-      //this.displayNotification()
-      this.selected = item
     
-      this.$snotify.success('Deseja excluir o cliente ' + this.selected.nome + '?', 'Excluir', {
-        timeout: 5000,
-        closeOnClick: false,
-        pauseOnHover: true,
-        icon: false,
-        buttons: [
-          { text: 'Sim', action: (toast) => {
-            this.$delete(this.items, item.id)
-            console.log('Excluindo ' + item.nome)
-            this.$snotify.remove(toast.id)
-          }},
-          { text: 'Não', action: (toast) => {
-            this.selected = {}
-            console.log(item)
-            this.$snotify.remove(toast.id)
-          }}
-        ]
-      })
+    fecharFormulario() {
+      this.imovelModel = { cep: '', logradouro: '', numero: '', complemento: '', bairro: '', cidade: '', uf: '', aluguel: null, iptu: null }
+      this.$nextTick(() => { this.listarImoveis()})
+      this.showModal = false
+    },
+    
+    salvarFormulario(imovel) {
+      if(item.id == null) 
+        axios.post('http://localhost:3000/imoveis', imovel )
+      else 
+        axios.update('http://localhost:3000/imoveis', imovel)
+      
+      this.fecharFormulario()
+    },
+
+    listarImoveis() {
+      this.items = []
+      axios.get('http://localhost:3000/imoveis').then((response) => { this.items = response.data})
+    },
+
+    buscarCep(cep) {
+      axios.get('http://viacep.com.br/ws/'+ cep +'/json/')
+        .then(response => {
+          this.imovelModel.logradouro = response.data.logradouro
+          this.imovelModel.bairro = response.data.bairro
+          this.imovelModel.cidade = response.data.localidade
+          this.imovelModel.uf = response.data.uf
+        })
+        .catch( err => {
+          console.log(err)
+        })
     }
+
   },
+
   created() {
-    this.listarClientes();
+    this.listarImoveis();
   }
   
 }

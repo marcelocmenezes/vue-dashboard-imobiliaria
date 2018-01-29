@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
 //import  Auth from './auth/auth'
 import Snotify from 'vue-snotify'
-
+import money from  'v-money'
+import mask from  'vue-the-mask'
 
 //Globals Plugins
 import App from './App'
@@ -15,6 +16,8 @@ import routes from './router/routes'
 Vue.use(VueRouter)
 Vue.use(Vuetify)
 Vue.use(Snotify)
+Vue.use(money)
+Vue.use(mask)
 
 //Configure Router
 const router = new VueRouter({
