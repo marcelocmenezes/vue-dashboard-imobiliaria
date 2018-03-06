@@ -216,10 +216,10 @@ export default {
     },
 
     criar(item) {
-      axios.post('http://localhost:3000/clientes', item )
+      axios.post('/clientes', item )
     },
     listarClientes() {
-      axios.get('http://localhost:3000/clientes').then((response) => { this.items = response.data})
+      axios.get('/clientes').then((response) => { this.items = response.data})
     },
     excluir(item) {
       //this.displayNotification()

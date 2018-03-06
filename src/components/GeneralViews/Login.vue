@@ -64,7 +64,7 @@
 </template>
 <script>
 import axios from 'axios'
-require('axios-debug')(axios);
+//require('axios-debug')(axios);
 
 export default {
   data: () => {
@@ -75,13 +75,16 @@ export default {
   },
   
   methods: {
-    login: (mail, pass) => {
-      axios.post('/auth', {mail, pass}).then((response) => {
-        if(response.status === 200 && 'token' in response.body) {
-          this.$session.start()
-          this.$session.set('jwt', response.body.token)
+    login: function(email, senha) {
+      var self = this
+      axios.post('/auth', {email, senha}).then((response) => {
+        
+        if(response.status === 200 && 'token' in response.data) {
+          self.$session.start()
+          self.$session.set('jwt', response.data.token)
           axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$session.get('jwt')
-          this.$router.push('/dashboard')
+          self.$router.push('/dashboard')
+          
         }
       })
       .catch(function(res) {

@@ -11,15 +11,12 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
-    "bootstrap": "^3.3.7",
-    "chart.js": "^2.7.1",
     "v-money": "^0.8.1",
     "vue": "^2.5.2",
     "vue-chartjs": "^3.1.0",
-    "vue-clickaway": "^2.1.0",
     "vue-router": "^3.0.1",
     "vue-session": "^1.0.0",
-    "vue-snotify": "^3.0.4",
+    "vue-swal": "^0.0.6",
     "vue-the-mask": "^0.11.1",
     "vuetify": "^0.17.6"
   },
