@@ -18,7 +18,7 @@
         <v-btn icon>
           <v-icon>notifications</v-icon>
         </v-btn>
-        <v-btn icon>
+        <v-btn @click="logout()" icon>
           <v-icon>exit_to_app</v-icon>
         </v-btn>
       </div>
@@ -87,6 +87,17 @@ import SideBarItems from './sidebar'
         childData: {
           barSearch: this.search
         }
+      }
+    },
+    beforeCreate: function () {
+      if (!this.$session.exists()) {
+        this.$router.push('/auth/login')
+      }
+    },
+    methods: {
+      logout: () => {
+        this.$session.destroy()
+        this.$router.push('/auth/login')
       }
     }
   }

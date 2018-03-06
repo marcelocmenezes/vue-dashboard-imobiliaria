@@ -23,6 +23,7 @@
                         min="6"
                         name="email"
                         label="E-mail"
+                        v-model="email"
                         counter
                       ></v-text-field>
                     </v-flex>
@@ -33,7 +34,13 @@
                         name="senha"
                         label="Senha"
                         type="password"
+                        v-model="senha"
                       ></v-text-field>
+                    </v-flex>
+                  </v-layout>
+                  <v-layout row>
+                    <v-flex xs12>
+                      <v-btn block color="success" @click="login(email, senha)">Entrar</v-btn>
                     </v-flex>
                   </v-layout>
 
@@ -56,8 +63,36 @@
   </v-app>
 </template>
 <script>
+import axios from 'axios'
+require('axios-debug')(axios);
+
 export default {
+  data: () => {
+    return {
+      email: null,
+      senha: null
+    }
+  },
   
+  methods: {
+    login: (mail, pass) => {
+      axios.post('/auth', {mail, pass}).then((response) => {
+        if(response.status === 200 && 'token' in response.body) {
+          this.$session.start()
+          this.$session.set('jwt', response.body.token)
+          axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$session.get('jwt')
+          this.$router.push('/dashboard')
+        }
+      })
+      .catch(function(res) {
+        if(res instanceof Error) {
+          console.log(res.message);
+        } else {
+          console.log(res.data);
+        }
+      })
+    }
+  }
 }
 </script>
 <style scoped>

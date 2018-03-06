@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
-//import  Auth from './auth/auth'
 import Snotify from 'vue-snotify'
 import money from  'v-money'
 import mask from  'vue-the-mask'
+import VueSession from 'vue-session'
+import axios from 'axios'
 
 //Globals Plugins
 import App from './App'
@@ -12,12 +13,21 @@ import App from './App'
 //Router Setup
 import routes from './router/routes'
 
+// Session Options
+var sessionOptions = {
+  persist: true
+}
+
+// Axios Config
+axios.defaults.baseURL = 'https://api.marcelocmenezes.com.br/v1/'
+
 //Setup Plugins
 Vue.use(VueRouter)
 Vue.use(Vuetify)
 Vue.use(Snotify)
 Vue.use(money)
 Vue.use(mask)
+Vue.use(VueSession, sessionOptions)
 
 //Configure Router
 const router = new VueRouter({
@@ -28,7 +38,7 @@ const router = new VueRouter({
 //Verificando Login
 /*router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requiresAuth)) {
-    if(!Auth.hasToken()){
+    if(this.$session.exists()){
       console.log('não logado')
       next({
         path: '/auth/login'
@@ -41,7 +51,8 @@ const router = new VueRouter({
   } else {
     next()
   }
-})*/
+})
+*/
 
 //Config to Dev
 Vue.config.productionTip = false
