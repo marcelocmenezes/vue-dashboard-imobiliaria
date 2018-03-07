@@ -53,12 +53,21 @@
       <v-list dense>
         <v-divider />
         <v-list-tile v-for="item in items" :key="item.title" @click="$router.push(item.path)">
-        <v-list-tile-action>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>{{ item.text }}</v-list-tile-title>
-        </v-list-tile-content>
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.text }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile @click.stop="suporteModal = !suporteModal">
+          <v-list-tile-action>
+            <v-icon>help</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Suporte</v-list-tile-title>
+          </v-list-tile-content>
         </v-list-tile>
 
       </v-list>
@@ -67,6 +76,27 @@
     <!--Sidebar-->
 
     <router-view></router-view>
+
+
+
+    <v-dialog v-model="suporteModal" max-width="480px">
+      <v-card>
+        <v-card-title>
+          <h2>Suporte</h2>
+          
+        </v-card-title>
+        <v-divider />
+        <v-card-text>
+          <h4 class="light">Telefones</h4>
+          <p>+55 11 3986-0465</p>
+          <h4 class="light">E-mail</h4>
+          <p>ti@rvinformatica.tech</p>
+          <small class="grey--text ">Atendimento de <span class="green--text">09:00 às 18:00</span></small>
+
+
+        </v-card-text>
+      </v-card>
+    </v-dialog>
 
   </v-app>
   
@@ -80,6 +110,7 @@ import SideBarItems from './sidebar'
   export default {  
     data: () => {
       return {
+        suporteModal: false,
         drawer: null,
         items: SideBarItems,
         userInfo: { name: 'Marcelo Menezes', type: 'Developer', avatar: 'https://avatars1.githubusercontent.com/u/8910193?s=460&v=4' },

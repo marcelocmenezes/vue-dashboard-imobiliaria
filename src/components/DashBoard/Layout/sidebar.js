@@ -9,7 +9,7 @@ const sidebarLinks =  [
   { icon: 'perm_identity', text: 'Usuários', path: '/users'  },
   //{ icon: 'phonelink', text: 'App download', path: ''  },
   { icon: 'settings', text: 'Configurações', path: '/dashboard/config'  },
-  { icon: 'help', text: 'Suporte', path: '/dashboard/suporte'  }
+  //{ icon: 'help', text: 'Suporte', path: '/dashboard/suporte'  }
 ]
 
 

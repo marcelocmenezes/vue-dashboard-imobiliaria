@@ -5516,10 +5516,6 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-chartjs@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/vue-chartjs/-/vue-chartjs-3.1.0.tgz#bf29bd940312bfdbbde337e03cb538f2805b184e"
-
 vue-hot-reload-api@^2.2.0:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.2.4.tgz#683bd1d026c0d3b3c937d5875679e9a87ec6cd8f"
@@ -5578,13 +5574,13 @@ vue-the-mask@^0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/vue-the-mask/-/vue-the-mask-0.11.1.tgz#91ee01008354ae57bccc79bb61b65f32d971d9d5"
 
-vue@^2.5.2:
+vue@^2.5.13:
   version "2.5.13"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.13.tgz#95bd31e20efcf7a7f39239c9aa6787ce8cf578e1"
 
-vuetify@^0.17.6:
-  version "0.17.6"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-0.17.6.tgz#09197c0baba675a13ea749e326ff47df367b21a8"
+vuetify@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.0.5.tgz#10e83123a78c82e3d9c2efe6734b7f55ba678dd4"
 
 watchpack@^1.4.0:
   version "1.4.0"

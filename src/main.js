@@ -6,6 +6,8 @@ import mask from  'vue-the-mask'
 import VueSession from 'vue-session'
 import axios from 'axios'
 
+import VueSwal from 'vue-swal'
+
 //Globals Plugins
 import App from './App'
 
@@ -26,6 +28,8 @@ Vue.use(Vuetify)
 Vue.use(money)
 Vue.use(mask)
 Vue.use(VueSession, sessionOptions)
+
+Vue.use(VueSwal)
 
 //Configure Router
 const router = new VueRouter({
